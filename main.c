@@ -51,15 +51,32 @@ int main()
     
 
     //  exercice 5
-    int number,i; 
-    // int current_odd = 1;
-    int exposant ;
-    int result = 1;  
-    printf("entre a the base number: ");
-    scanf("%d", &number);
+    // int number; 
+    // // int current_odd = 1;
+    // // int exposant ;
+    // int reverse = 0;
+    // // int result = 1;  
+    // printf("entre a the base number: ");
+    // scanf("%d", &number);
     
-    for 
-     
+    // while (number != 0) {
+    //     reverse= reverse* 10;
+    //     reverse = reverse+ number % 10;
+    //     number = number / 10;
+    // }
 
+    // printf("Reversed number = %d", reverse);
+     
+    int number, i;
+    int result=0;
+
+    printf("enter a number: ");
+    scanf("%d", &number);
+
+    for (i = 1; i <= number; i++){
+        result += i;
+          
+    }
+    printf("the result is %d", result);
     return 0;
 }

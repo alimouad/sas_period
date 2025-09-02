@@ -75,3 +75,18 @@ exercice 6:
     printf("\n");
 
 
+
+exercice 10:
+ int number, i;
+    int result=0;
+    printf("enter a number: ");
+    scanf("%d", &number);
+
+    for (i = 1; i <= number; i++){
+        result += i;
+          
+    }
+    printf("the result is %d", result);
+    return 0;
+
+
