@@ -1,0 +1,67 @@
+Exercice 1 :
+ int age;
+    char name[10];
+    char address[10];
+    char gender[10];
+    int phone;
+    char email[10];
+
+    printf("Enter your age: ");
+    scanf("%d", &age);
+    printf("Enter your name: ");
+    scanf("%s", name);
+    printf("Enter your address: ");
+    scanf("%s", address);
+    printf("Enter your gender: ");
+    scanf("%s", &gender);
+    printf("Enter your phone number: ");
+    scanf("%d", &phone);
+    printf("Enter your email: ");
+    scanf("%s", email); 
+
+
+Exercice 2:
+    int temperature;
+    printf("Enter the temperature in Celsius: ");
+    scanf("%d", &temperature);
+    int kelvin = temperature + 273;
+    printf("Temperature in Kelvin: %d\n", kelvin);
+
+
+Exercice 4:
+int speed;
+printf("Enter the speed in km/h: ");
+scanf("%d", &speed);
+int speed_mps = speed * 0.27778;
+printf("Speed in m/s: %d\n", speed_mps);    
+
+
+// Exercice 5:
+int temperature;
+printf("Enter the temperature in Celsius: ");
+scanf("%d", &temperature);
+if(temperature < 0){
+    printf("The state of water is: Solid\n");
+}
+else if(temperature >= 0 && temperature < 100){
+    printf("The state of water is: Liquid\n");
+}
+else{
+    printf("The state of water is: Gas\n");
+}
+
+
+
+// exercice 7:
+int num1, num2, num3;
+printf("Enter three numbers: ");
+scanf("%d %d %d", &num1, &num2, &num3);
+int result = pow((num1 + num2 + num3), 1/3);
+printf("The result is: %d\n", result);
+
+// exercice 11:
+int width, height;
+printf("Enter the width and height of the rectangle: ");
+scanf("%d %d", &width, &height);
+int area = width * height;
+printf("Area: %d\n", area);
