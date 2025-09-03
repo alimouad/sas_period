@@ -5,6 +5,8 @@ int main()
 { 
 
     int numberArray;
+    // int result = 0;
+    int lowestNumber;
 
     printf("enter the Array Element : ");
     scanf("%d", &numberArray);
@@ -12,14 +14,19 @@ int main()
 
         for (int i = 0; i < numberArray; i++) {
             printf("Enter value for element %d: ", i + 1);
+            
             scanf("%d", &array[i]);
         }
-
-        // Affiche les éléments du tableau
-        printf("Array elements are:\n");
         for (int i = 0; i < numberArray; i++) {
-            printf("%d ", array[i]);
-        }
+            lowestNumber = array[0];
+            if (lowestNumber > array[i]){
+                lowestNumber = array[i];
+            }
 
+        }
+        printf("the result is %d",lowestNumber);
+
+
+        
     return 0;
 }
