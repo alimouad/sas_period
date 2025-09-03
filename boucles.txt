@@ -1,0 +1,92 @@
+exercice 1:
+    int number;
+    printf("enter a number: ");
+    scanf("%d",&number);
+    
+    for (int i=1; i<=10; i++){
+        printf("%d * %d ==> %d \n", number, i , i * number);
+    }
+
+exercice 2:
+
+
+
+exercice 3:
+    int number,i;
+    int result = 0;
+    printf("entre a number: ");
+    scanf("%d", &number);
+
+    for (i=1; i<=number; i++){
+
+        result += i;
+    };
+    printf("the result is %d", result);
+
+exercice 4:
+
+    int number,i; 
+    int current_odd = 1;
+    // int result = 0;
+    printf("entre a number: ");
+    scanf("%d", &number);
+  
+
+       
+    for (i = 0; i < number; i++) {
+        printf("%d ", current_odd);
+        current_odd += 2;  // move to next odd number
+    }
+    
+
+exercice 5 :
+    int number,i; 
+    // int current_odd = 1;
+    int exposant ;
+    int result = 1;  
+    printf("entre a the base number: ");
+    scanf("%d", &number);
+
+    printf("enter the exposant ");
+    scanf("%d" , &exposant);
+
+    
+    for (i = 0; i < exposant; i++) {
+            result *= number;  
+        }
+
+        printf("The result is: %d\n", result);
+    
+   
+
+exercice 6:
+
+ int number, i;
+    int current_even = 2;  
+
+    printf("Enter how many even numbers to print: ");
+    scanf("%d", &number);
+
+    for (i = 0; i < number; i++) {
+        printf("%d ", current_even);
+        current_even += 2; 
+    }
+
+    printf("\n");
+
+
+
+exercice 10:
+ int number, i;
+    int result=0;
+    printf("enter a number: ");
+    scanf("%d", &number);
+
+    for (i = 1; i <= number; i++){
+        result += i;
+          
+    }
+    printf("the result is %d", result);
+    return 0;
+
+
