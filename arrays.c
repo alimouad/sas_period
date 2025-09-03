@@ -2,30 +2,50 @@
 #include <stdlib.h>
 
 int main()
-{ 
+{
 
     int numberArray;
-    // int result = 0;
-    int lowestNumber;
 
     printf("enter the Array Element : ");
     scanf("%d", &numberArray);
     int array[numberArray];  
 
-        for (int i = 0; i < numberArray; i++) {
-            printf("Enter value for element %d: ", i + 1);
+    for (int i = 0; i < numberArray; i++) {
+        printf("Enter value for element %d: ", i + 1);
+        scanf("%d", &array[i]);
+    }
+
+    int inxArray;
+    printf("the array index you wanna change: ");
+    scanf("%d",&inxArray);
+
+
+    int value;
+    printf("enter the new value change :");
+    scanf("%d",&value);
+
+    printf("the old array \n");
+
+    for(int i = 0; i < numberArray ; i++){
+        printf("%d", array[i]);
+        printf("\n");
+    }
+      // Update the value at the given index
+    array[inxArray] = value;
+
+    // Print the updated array
+    printf("The updated array:\n");
+    for (int i = 0; i < numberArray; i++) {
+        printf("%d\n", array[i]);
+    }
+
+
+
+    
+     
+
             
-            scanf("%d", &array[i]);
-        }
-        for (int i = 0; i < numberArray; i++) {
-            lowestNumber = array[0];
-            if (lowestNumber < array[i]){
-                lowestNumber = array[i];
-            }
-
-        }
-        printf("the result is %d",lowestNumber);
-
+           
 
 
     return 0;

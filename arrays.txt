@@ -85,3 +85,152 @@ exercice 4:
         }
         printf("the result is %d",lowestNumber);
 
+
+
+exercice 5:
+ int numberArray;
+    // int result = 0;
+    int lowestNumber;
+
+    printf("enter the Array Element : ");
+    scanf("%d", &numberArray);
+    int array[numberArray];  
+
+        for (int i = 0; i < numberArray; i++) {
+            printf("Enter value for element %d: ", i + 1);
+            scanf("%d", &array[i]);
+        }
+        for (int i = 0; i < numberArray; i++) {
+            for (int j = i + 1; j < numberArray ; j++)
+            
+            if (array[i] > array[j]){
+                lowestNumber = array[i];
+                array[i] =  array[j];
+                array[j] = lowestNumber;
+            }
+        }
+        printf("The numbers in ascending order is:");
+        for (int i = 0; i < numberArray; i++){
+            printf("%d", array[i]);
+        }
+       
+exercice 6:
+ int numberArray;
+    // int result = 0;
+    int multip;
+
+    printf("enter the Array Element : ");
+    scanf("%d", &numberArray);
+    int array[numberArray];  
+
+    for (int i = 0; i < numberArray; i++) {
+        printf("Enter value for element %d: ", i + 1);
+        scanf("%d", &array[i]);
+    }
+    printf("the multi Number : ");
+    scanf("%d", &multip);
+    
+    printf ("the new array \n");
+    for (int i = 0; i < numberArray; i++) {
+            array[i] *=  multip;
+            
+            printf("%d", array[i]);
+        }
+    
+  exercice 8 :
+     int numberArray;
+
+
+    printf("enter the Array Element : ");
+    scanf("%d", &numberArray);
+    int array[numberArray];  
+
+    for (int i = 0; i < numberArray; i++) {
+        printf("Enter value for element %d: ", i + 1);
+        scanf("%d", &array[i]);
+    }
+    
+ int newArray[numberArray];
+    printf ("the new array \n");
+    for (int i = 0; i < numberArray; i++) {
+           
+            newArray[i] = array[i];
+            printf("%d", array[i]);
+
+        } 
+        printf("\n");
+
+    printf("the copied Arry \n") ;
+    for (int i = 0; i < numberArray; i++) {
+            
+            printf("%d", newArray[i]);
+
+        }
+
+exercice 10;
+
+    int numberArray;
+    int searchedNum;
+
+
+    printf("enter the Array Element : ");
+    scanf("%d", &numberArray);
+    int array[numberArray];  
+
+    for (int i = 0; i < numberArray; i++) {
+        printf("Enter value for element %d: ", i + 1);
+        scanf("%d", &array[i]);
+    }
+
+
+    printf("type a number to search for: ");
+    scanf("%d", &searchedNum);
+
+    for(int i = 0; i < numberArray; i++){
+        if (searchedNum == array[i]) { 
+            printf("this is your number %d", searchedNum);
+            break;
+        }
+        else {
+            printf("this number is not here");
+            break;
+        }
+       
+    }
+
+
+    exeercice 11:
+     int numberArray;
+
+    printf("enter the Array Element : ");
+    scanf("%d", &numberArray);
+    int array[numberArray];  
+
+    for (int i = 0; i < numberArray; i++) {
+        printf("Enter value for element %d: ", i + 1);
+        scanf("%d", &array[i]);
+    }
+
+    int inxArray;
+    printf("the array index you wanna change: ");
+    scanf("%d",&inxArray);
+
+
+    int value;
+    printf("enter the new value change :");
+    scanf("%d",&value);
+
+    printf("the old array \n");
+
+    for(int i = 0; i < numberArray ; i++){
+        printf("%d", array[i]);
+        printf("\n");
+    }
+      // Update the value at the given index
+    array[inxArray] = value;
+
+    // Print the updated array
+    printf("The updated array:\n");
+    for (int i = 0; i < numberArray; i++) {
+        printf("%d\n", array[i]);
+    }
