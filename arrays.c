@@ -19,7 +19,7 @@ int main()
         }
         for (int i = 0; i < numberArray; i++) {
             lowestNumber = array[0];
-            if (lowestNumber > array[i]){
+            if (lowestNumber < array[i]){
                 lowestNumber = array[i];
             }
 
@@ -27,6 +27,6 @@ int main()
         printf("the result is %d",lowestNumber);
 
 
-        
+
     return 0;
 }
