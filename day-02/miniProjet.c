@@ -37,7 +37,7 @@ int main(){
 
         if (choice < 1 || choice > 6) {
         printf("Invalid choice number.\n");
-        return;
+        continue;
     }
         switch (choice)
         {
@@ -79,7 +79,7 @@ int main(){
         printf("2.Show all Books\n");
         printf("3.ReAssign a detail for a book\n");
         printf("4.Delete a book\n");
-        printf("5.Show the number of all books in the stock\n");
+        printf("5.Show the total books in the stock\n");
         printf("6.Exit\n");
     }
     

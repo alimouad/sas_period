@@ -68,15 +68,15 @@ int main() {
 
 
 // exercice 11:
-int width, height;
-printf("Enter the width and height of the rectangle: ");
-scanf("%d %d", &width, &height);
-int area = width * height;
-printf("Area: %d\n", area);
+// int width, height;
+// printf("Enter the width and height of the rectangle: ");
+// scanf("%d %d", &width, &height);
+// int area = width * height;
+// printf("Area: %d\n", area);
 
 
 
-    return 0;
+    // return 0;
 =======
 
 #include <stdio.h>
@@ -146,12 +146,12 @@ int main() {
 // printf("The result is: %d\n", result);
 
 
-// exercice 11:
-int width, height;
-printf("Enter the width and height of the rectangle: ");
-scanf("%d %d", &width, &height);
-int area = width * height;
-printf("Area: %d\n", area);
+// // exercice 11:
+// int width, height;
+// printf("Enter the width and height of the rectangle: ");
+// scanf("%d %d", &width, &height);
+// int area = width * height;
+// printf("Area: %d\n", area);
 
 
 
