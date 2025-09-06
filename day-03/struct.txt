@@ -1,0 +1,93 @@
+challenge1:
+struct Test 
+{
+    char name[20];
+    char lastname[20];
+    int age;
+};
+
+struct Test test;
+
+
+int main(){
+    test = (struct Test){"John", "Doe", 30};
+    // printf("Size of struct Test: %d\n", sizeof(test));
+    printf("Name: %s\n", test.name);
+    printf("Last Name: %s\n", test.lastname);   
+    printf("Age: %d\n", test.age);
+
+    return 0;
+}
+
+
+challenge 2:
+
+struct Test 
+{
+    char name[20];
+    char lastname[20];
+    int age;
+    int notes[5];
+};
+
+struct Test test;
+
+
+int main(){
+    test = (struct Test){"John", "Doe", 30, {90, 85, 88, 92, 95}};
+    // printf("Size of struct Test: %d\n", sizeof(test));
+    printf("Name: %s\n", test.name);
+    printf("Last Name: %s\n", test.lastname);   
+    printf("Age: %d\n", test.age);
+
+    for (int i= 0; i < 5; i++){
+        printf("Note %d: %d\n", i + 1, test.notes[i]);
+    }
+
+    return 0;
+}
+
+challenge3:
+struct Rectangle{
+    int length;
+    int breadth;
+}; 
+
+struct Rectangle rectangle;
+
+void initRectangle(int l, int b){
+    rectangle.length = l;
+    rectangle.breadth = b;
+    int S = l * b;   
+    printf("Area of rectangle: %d\n", S);  //
+}
+
+int main(){
+    initRectangle(10, 5);
+    return 0;
+}
+
+
+challenge4:
+struct Plan {
+    int x;
+    int y;
+}; 
+
+struct Plan plan;
+void updateYear(struct Plan *c) {
+   c->x = 20;  // Change the year
+   c->y = 23;
+}
+
+
+int main() {
+  plan  = (struct Plan){22, 20};
+
+  updateYear(&plan);  
+
+  printf("X: %d\n", plan.x);
+  printf("Y: %d\n", plan.y);
+
+  return 0;
+}
