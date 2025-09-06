@@ -29,6 +29,11 @@ void modifyContact(void);
 void deleteContact(void);
 void searchContact(void);
 void showDeletedContacts(void);
+void searchMenu(void);
+void searchName(void);
+void searchByName(void);
+void searchByNumber(void);
+void searchByAdress(void);
 
 
 void divider(){
@@ -159,26 +164,42 @@ void modifyContact(){
         printf("No contacts in the memory.\n");
         return;
     }
-    int contactNumber;
-    printf("Enter the contact number you wanna modify (1 to %d): ", contactSize);
-    scanf("%d", &contactNumber);
 
-    if (contactNumber < 1 || contactNumber > contactSize) {
-        printf("Invalid contact number.\n");
+
+        searchMenu();
+        int searchChoice;
+
+        printf("\nEnter your choice :\n");
+        scanf("%d", &searchChoice);
+
+        if (searchChoice < 1 || searchChoice > 6) {
+        printf("Invalid choice number.\n");
         return;
     }
 
-    int index = contactNumber - 1; 
-    printf("Modifing details for Contact %d\n", contactNumber);
-  
-    printf("Enter the new contact number: ");
-    scanf("%s", contact[index].number); 
-    printf("Enter the new contact email adress: ");
-    scanf("%s", contact[index].adressEmail);
+    switch (searchChoice)
+    {
+    case 1:
+    
+        searchByName();
+        break;
+    case 2:
+        searchByNumber();
+        break;
 
-    printf("\nDetails updated for Contact %d\n", contactNumber);
+    case 3:
+        searchByAdress();
+        break;
 
+    case 4:
+        exit(0);
+        break;
+
+    default:
+        printf("*****Invalid choice*****");
+        
     divider();
+}
 }
 
 
@@ -218,7 +239,40 @@ void searchContact(){
         printf("No contacts in the memory.\n");
         return;
     }
+    searchName();
+}
 
+
+// show deleted contacts function ************
+void showDeletedContacts() {
+    if (deletedSize == 0) {
+        printf("No deleted contacts in the memory.\n");
+        return;
+    }
+    printf("You have %d deleted contacts:\n", deletedSize);
+    
+    for (int i = 0; i < deletedSize; i++) {
+            printf("\nDeleted Contact %d\n", i + 1);
+            printf("Name: %s\n", deletedContact[i].contactName);
+            printf("Number: %s\n", deletedContact[i].number);      
+            printf("Email Adress: %s\n", deletedContact[i].adressEmail);
+            printf("\n");  
+    }
+    divider();
+}
+
+
+
+void searchMenu(){
+    printf("\nSearch Menu\n");
+    printf("1.Search by Name\n");
+    printf("2.Search by Number\n");
+    printf("3.Search by Email Adress\n");
+    printf("4.Exit\n");
+}
+
+
+void searchName(){
     char searchName[100];
     printf("Enter the contact name you wanna search: ");
     scanf("%s", searchName);
@@ -243,20 +297,91 @@ void searchContact(){
     divider();
 }
 
-// show deleted contacts function ************
-void showDeletedContacts() {
-    if (deletedSize == 0) {
-        printf("No deleted contacts in the memory.\n");
-        return;
+void searchByName(){
+    char searchName[100];
+    printf("Enter the contact name you wanna search: ");
+    scanf("%s", searchName);
+
+    int found = 0; 
+
+    for (i = 0; i < contactSize; i++) {
+        if (strcmp(contact[i].contactName, searchName) == 0) {
+            
+            printf("Modifing details for Contact %d\n", searchName);
+        
+            printf("Enter the new contact number: ");
+            scanf("%s", contact[i].number); 
+            printf("Enter the new contact email adress: ");
+            scanf("%s", contact[i].adressEmail);
+
+            printf("\nDetails updated for Contact %s\n", searchName);
+            found = 1; 
+            break; 
+        }
     }
-    printf("You have %d deleted contacts:\n", deletedSize);
-    
-    for (int i = 0; i < deletedSize; i++) {
-            printf("\nDeleted Contact %d\n", i + 1);
-            printf("Name: %s\n", deletedContact[i].contactName);
-            printf("Number: %s\n", deletedContact[i].number);      
-            printf("Email Adress: %s\n", deletedContact[i].adressEmail);
-            printf("\n");  
+
+    if (!found) {
+        printf("\nContact with name '%s' not found.\n", searchName);
     }
+
+    divider();
+}
+
+void searchByNumber(){
+    char searchNumber[100];
+    printf("Enter the contact name you wanna search: ");
+    scanf("%s", searchNumber);
+
+    int found = 0; 
+
+    for (i = 0; i < contactSize; i++) {
+        if (strcmp(contact[i].number, searchNumber) == 0) {
+            
+            printf("Modifing details for Contact %d\n", searchNumber);
+        
+            printf("Enter the new contact number: ");
+            scanf("%s", contact[i].number); 
+            printf("Enter the new contact email adress: ");
+            scanf("%s", contact[i].adressEmail);
+
+            printf("\nDetails updated for Contact %s\n", searchNumber);
+            found = 1; 
+            break; 
+        }
+    }
+
+    if (!found) {
+        printf("\nContact with name '%s' not found.\n", searchNumber);
+    }
+
+    divider();
+}
+void searchByAdress(){
+    char searchAdress[100];
+    printf("Enter the contact name you wanna search: ");
+    scanf("%s", searchAdress);
+
+    int found = 0; 
+
+    for (i = 0; i < contactSize; i++) {
+        if (strcmp(contact[i].adressEmail, searchAdress) == 0) {
+            
+            printf("Modifing details for Contact %d\n", searchAdress);
+        
+            printf("Enter the new contact number: ");
+            scanf("%s", contact[i].number); 
+            printf("Enter the new contact email adress: ");
+            scanf("%s", contact[i].adressEmail);
+
+            printf("\nDetails updated for Contact %s\n", searchAdress);
+            found = 1; 
+            break; 
+        }
+    }
+
+    if (!found) {
+        printf("\nContact with name '%s' not found.\n", searchAdress);
+    }
+
     divider();
 }
