@@ -1,0 +1,115 @@
+challenge 1:
+char str1[100];
+    printf("Enter a string: ");
+    fgets(str1, sizeof(str1), stdin);
+
+    printf("You entered: %s", str1);
+
+challenge 2:    
+char str1[100];
+    int i;  
+    printf("Enter a string: ");
+    fgets(str1, sizeof(str1), stdin);
+    int length = sizeof(str1) / sizeof(str1[0]);
+    printf("You entered: %d", length);
+
+challenge3 :
+   char str1[200], str2[100];  // make str1 bigger to hold both
+
+    printf("Enter a string: ");
+    fgets(str1, sizeof(str1), stdin);
+    str1[strcspn(str1, "\n")] = 0; // remove newline
+
+    printf("Enter another string: ");
+    fgets(str2, sizeof(str2), stdin);
+    str2[strcspn(str2, "\n")] = 0; // remove newline
+
+    strcat(str1, str2);
+
+    printf("Concatenated string: %s\n", str1);
+
+challenge 4:
+     while(1){
+    char str1[200], str2[100];  // make str1 bigger to hold both
+
+    printf("Enter a string: ");
+    fgets(str1, sizeof(str1), stdin);
+    str1[strcspn(str1, "\n")] = 0; // remove newline
+
+    printf("Enter another string: ");
+    fgets(str2, sizeof(str2), stdin);
+    str2[strcspn(str2, "\n")] = 0; // remove newline
+
+    if (strcmp(str1, str2) == 0) {
+        printf("The concatenated string is equal to the second string.\n");
+        break;
+    } else {
+        printf("The concatenated string is not equal to the second string.\n");
+    }
+
+    }
+
+challenge5:
+void reverseChar(char str[]) {
+    int n = strlen(str);
+    for (int i = 0; i < n / 2; i++) {
+        char temp = str[i];
+        str[i] = str[n - i - 1];
+        str[n - i - 1] = temp;
+    }
+}
+
+int main() {
+    char text[] = "Hello World";  // must be an array, not string literal
+    reverseChar(text);
+    printf("%s\n", text);
+    return 0;
+}
+
+challenge7:
+ // convert to majuscules
+    void stringToUppercase(char *str) {
+    int i = 0;
+    while (str[i] != '\0') { // Loop until the null terminator is found
+        str[i] = toupper((unsigned char)str[i]); // Convert character to uppercase
+        i++;
+    }
+}
+
+
+int main() {
+     char str1[200];
+    printf("Enter a string: ");
+    fgets(str1, sizeof(str1), stdin);
+    str1[strcspn(str1, "\n")] = 0; // remove newlin
+
+    stringToUppercase(str1);
+    printf("Uppercase string: %s\n", str1);
+    
+    // printf("Concatenated string: %s\n", str1);
+
+    return 0;
+}
+
+challenge 9:
+void removeSpaces(char *str) {
+    int count = 0; 
+
+   int length = strlen(str);
+    for (int i = 0; i < length; i++) {
+        if (str[i] != ' ') {
+            str[count++] = str[i];
+        }
+    }
+    str[count] = '\0'; 
+}
+
+int main() {
+    char myString[] = "  This is a string with spaces  ";
+    printf("Original string: \"%s\"\n", myString);
+
+    removeSpaces(myString);
+    printf("String after removing spaces: \"%s\"\n", myString);
+
+    return 0;
+}
