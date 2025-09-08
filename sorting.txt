@@ -1,0 +1,102 @@
+1. Bubble Sort
+#include <stdio.h>
+
+void bubbleSort(int arr[], int n){
+    int i , j;
+    for(i = 0 ; i < n; i++){
+        for (j = 0; j< n - 1; j++){
+           if (arr[j] > arr[j + 1]) {         // 
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+int main() {
+    int i;
+    int arra[] = {12,323,223,1,13};
+    int length = sizeof(arra) / sizeof(arra[0]);
+    // must be an array, not string literal
+    bubbleSort(arra, length);
+    for (i = 0; i < length; i++){
+        printf("%d\n",arra[i]);
+    }
+    printf("done");
+    return 0;
+}
+
+
+🔹 2. Selection Sort
+void selectionSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        int minIndex = i;
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        // swap
+        int temp = arr[i];
+        arr[i] = arr[minIndex];
+        arr[minIndex] = temp;
+    }
+}
+
+🔹 3. Insertion Sort
+void insertionSort(int arr[], int n) {
+    for (int i = 1; i < n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+        // shift bigger elements to the right
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+}
+
+🔹 Example Usage
+int main() {
+    int arr[] = {5, 2, 9, 1, 6};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    // Try one of the sorting algorithms
+    bubbleSort(arr, n);
+    // selectionSort(arr, n);
+    // insertionSort(arr, n);
+
+    printf("Sorted array: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    return 0;
+}
+
+
+linear search
+#include<stdio.h>
+int main (){
+   int a[50], n, i, key, flag = 0;
+   printf("enter the no: of elements");
+   scanf ("%d",&n);
+   printf("enter the elements:
+");
+   for (i=0; i<n; i++)
+      scanf( "%d", &a[i]);
+   printf("enter a key element:
+");
+   scanf ("%d", &key);
+   for (i=0; i<n; i++){
+      if (a[i] == key){
+         flag = 1;
+         break;
+      }
+   }
+   if (flag == 1)
+      printf("search is successful:");
+   else
+      printf("search is unsuccessfull:");
+   return 0;
+}
