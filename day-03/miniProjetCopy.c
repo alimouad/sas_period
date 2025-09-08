@@ -52,7 +52,7 @@ int main(){
         printf("\nEnter your choice :\n");
         scanf("%d", &choice);
 
-        if (choice < 1 || choice > 6) {
+        if (choice < 1 || choice > 7) {
         printf("Invalid choice number.\n");
         continue;
        }
@@ -102,8 +102,6 @@ int main(){
 
 // menu Functions************
     void menu(){
-
-
         printf("\n\tMENU\n");
         printf("1.Add a Contact\n");
         printf("2.Show all Contacts\n");
@@ -116,15 +114,17 @@ int main(){
     
 
 // add book function************
-void addContact() {
-    
+void addContact() { 
     printf("***** Adding Book *****\n");
     printf("Enter how many contacts you wanna add: ");
     scanf("%d", &contactSize);
+    getchar(); 
 
     for (int i = 0; i < contactSize; i++) {
         printf("\nEnter the contact name: ");
         scanf("%s", contact[i].contactName);
+        
+        
 
         printf("Enter the contact number: ");
         scanf("%s", contact[i].number);
