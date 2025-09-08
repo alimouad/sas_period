@@ -2,25 +2,24 @@
 
 
 
-struct Plan {
-    int x;
-    int y;
+struct Rectangle{
+    int length;
+    int breadth;
 }; 
 
-struct  Plan plan;
-void updateYear(struct Plan *c) {
-   c->x = 20;  // Change the year
-   c->y = 23;
+struct Rectangle rectangle;
+
+void initRectangle(struct Rectangle rectangle){
+    int l,b;
+    l = rectangle.length;
+    b = rectangle.breadth ;
+    int S = l * b;   
+    printf("Area of rectangle: %d\n", S);  //
 }
 
+int main(){
 
-int main() {
-  plan  = (struct Plan){22, 20};
-
-  updateYear(&plan);  
-
-  printf("X: %d\n", plan.x);
-  printf("Y: %d\n", plan.y);
-
-  return 0;
-}
+    rectangle = (struct Rectangle){12,22};
+    initRectangle(rectangle);
+    return 0;
+}   

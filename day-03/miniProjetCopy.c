@@ -29,7 +29,7 @@ void modifyContact(void);
 void deleteContact(void);
 void searchContact(void);
 void showDeletedContacts(void);
-void searchMenu(void);
+void searchMenu(char *detail);
 void searchName(void);
 void searchByDetail(char *detail);
 void deleteByDetail(char *detail);
@@ -165,7 +165,8 @@ void modifyContact() {
         return;
     }
 
-    searchMenu();
+    char operaType[] = "modify";
+    searchMenu(operaType);
     int searchChoice;
     char detail[100];
 
@@ -209,7 +210,8 @@ void deleteContact(){
         printf("No contacts in the memory.\n");
         return;
     }
-    searchMenu();
+    char operaType[] = "delete";
+    searchMenu(operaType);
     int searchChoice;
     char detail[100];
 
@@ -282,8 +284,8 @@ void showDeletedContacts() {
 
 
 
-void searchMenu(){
-    printf("\nSearch Contact\n");
+void searchMenu(char *detail ){
+    printf("\nSearch Contact to %s \n", detail);
     printf("1.Search by Name\n");
     printf("2.Search by Number\n");
     printf("3.Search by Email Adress\n");
@@ -360,15 +362,12 @@ void deleteByDetail(char *detail) {
             deletedContact[deletedSize++] = contact[i];
 
             contact[i] = contact[i + 1];
-            
-            
             found = 1;
             break;
             printf("\n✅ Contact %s has been deleted.\n", contact[i].contactName);
         }
     }
     contactSize--; 
-    
 
     if (!found) {
         printf("\n❌ Contact with detail '%s' not found.\n", detail);
