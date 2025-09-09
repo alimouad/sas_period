@@ -104,3 +104,59 @@ int main (){
       printf("search is unsuccessfull:");
    return 0;
 }
+
+
+
+// Binary Search method***************
+Define a binSearch() function that accepts the array, the size of the array, and the target that you want to search.
+Then calculate the middle index of the array.
+Compare the target with the middle element using an if-else statement. Return the middle element if the target is found at the middle index.
+If the target is not available at the middle index, then check if it is greater or less than the middle element.
+If the target is greater than the middle element, then set the left index to mid + 1 and search in the right half of the array.
+If the target is less than the middle element, then set the right index to mid - 1 and search in the left half of the array.
+Repeat the above four steps until the left index becomes greater than the right index. If the element is found, return the index; otherwise, return element not found.
+#include <stdio.h>
+
+int binarySearch(int arr[], int size, int target) {
+    int left = 0, right = size - 1;
+    int foundIndex = -1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+
+        if (arr[mid] == target) {
+            foundIndex = mid;
+            break;
+        } else if (arr[mid] < target) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return foundIndex;
+}
+
+int main() {
+    int arr[] = {2, 4, 6, 8, 10, 12, 14};
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    int target;
+    printf("Enter the number to search: ");
+    scanf("%d", &target);
+
+    int result = binarySearch(arr, size, target);
+
+    if (result != -1) {
+        printf("✅ Element found at index: %d\n", result);
+    } else {
+        printf("❌ Element not found in the array.\n");
+    }
+
+    return 0;
+}
+
+In simple terms:
+
+If you have a sorted array, binary search is way faster than linear search.
+
+For small or unsorted arrays, linear search is simpler and sometimes preferable.

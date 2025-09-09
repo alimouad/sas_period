@@ -72,28 +72,73 @@
 //     return 0;
 // }
 
+// linaire search**********
+// #include<stdio.h>
+// int main (){
+//    int a[50], n, i, key, flag = 0;
 
-#include<stdio.h>
-int main (){
-   int a[50], n, i, key, flag = 0;
-   printf("enter the no: of elements :");
-   scanf ("%d",&n);
-   for (i=0; i<n; i++){
-    printf("enter the elements:");
-        scanf( "%d", &a[i]);
-   }
+
+//    printf("enter the no: of elements :");
+//    scanf ("%d",&n);
+
+//    for (i=0; i<n; i++){
+//         printf("enter the elements:");
+//         scanf( "%d", &a[i]);
+//    }
       
-   printf("enter a key element:");
-   scanf ("%d", &key);
-   for (i=0; i<n; i++){
-      if (a[i] == key){
-         flag = 1;
-         break;
-      }
-   }
-   if (flag == 1)
-      printf("search is successful:");
-   else
-      printf("search is unsuccessfull:");
-   return 0;
+//    printf("enter a key element:");
+//    scanf ("%d", &key);
+
+//    for (i=0; i<n; i++){
+//       if (a[i] == key){
+//          flag = 1;
+//          break;
+//       }
+//    }
+//    if (flag == 1)
+//       printf("search is successful:");
+//    else
+//       printf("search is unsuccessfull:");
+//    return 0;
+// }
+
+
+#include <stdio.h>
+
+int binarySearch(int arr[], int size, int target) {
+    int left = 0;
+    int right = size - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+
+        if (arr[mid] == target) {
+            return mid; // found at index mid
+        } else if (arr[mid] < target) {
+            left = mid + 1; // search in the right half
+        } else {
+            right = mid - 1; // search in the left half
+        }
+    }
+
+    return -1; // not found
+}
+
+int main() {
+    int arr[] = {2, 4, 6, 8, 10, 12, 14};
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    int target;
+    printf("Enter the number to search: ");
+    scanf("%d", &target);
+
+    int result = binarySearch(arr, size, target);
+
+    if (result != -1) {
+        printf("✅ Element found at index: %d\n", result);
+    } else {
+        printf("❌ Element not found in the array.\n");
+    }
+
+    return 0;
 }
