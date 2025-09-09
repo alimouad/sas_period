@@ -21,10 +21,10 @@ void showStock(void);
 
 
 void divider(){
-            for (int i = 0; i < 50; i++){
-                printf("-");
-            }
-        }
+    for (int i = 0; i < 50; i++){
+        printf("-");
+    }
+}
 
 
 
@@ -38,7 +38,7 @@ int main(){
         if (choice < 1 || choice > 6) {
         printf("Invalid choice number.\n");
         continue;
-    }
+        }
         switch (choice)
         {
         case 1:
