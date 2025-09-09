@@ -5,7 +5,7 @@ fgets(str1, sizeof(str1), stdin);
 
 printf("You entered: %s", str1);
 
-challenge 2:    
+challenge 2:  ===> string length********  
  char str[33];
     printf("Enter a string: ");
     fgets(str, sizeof(str), stdin);
@@ -87,7 +87,7 @@ challenge7:
 
 
 int main() {
-     char str1[200];
+    char str1[200];
     printf("Enter a string: ");
     fgets(str1, sizeof(str1), stdin);
     str1[strcspn(str1, "\n")] = 0; // remove newlin

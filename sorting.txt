@@ -1,10 +1,11 @@
+Sorting Methods *******************
 1. Bubble Sort
 #include <stdio.h>
 
 void bubbleSort(int arr[], int n){
     int i , j;
     for(i = 0 ; i < n; i++){
-        for (j = 0; j< n - 1; j++){
+        for (j = 0; j < n - 1; j++){
            if (arr[j] > arr[j + 1]) {         // 
                 int temp = arr[j];
                 arr[j] = arr[j + 1];
@@ -17,6 +18,10 @@ int main() {
     int i;
     int arra[] = {12,323,223,1,13};
     int length = sizeof(arra) / sizeof(arra[0]);
+     for (i = 0; i < length; i++){
+        printf("%d\n",arra[i]);
+    }
+    printf("done");
     // must be an array, not string literal
     bubbleSort(arra, length);
     for (i = 0; i < length; i++){
@@ -30,19 +35,18 @@ int main() {
 🔹 2. Selection Sort
 void selectionSort(int arr[], int n) {
     for (int i = 0; i < n - 1; i++) {
-        int minIndex = i;
-        for (int j = i + 1; j < n; j++) {
-            if (arr[j] < arr[minIndex]) {
-                minIndex = j;
+        int minIndex = i;                  // Assume the minimum is the first unsorted element
+        for (int j = i + 1; j < n; j++) { // Look through the rest of the unsorted elements
+            if (arr[j] < arr[minIndex]) { // If a smaller element is found
+                minIndex = j;             // Update minIndex to this new minimum element
             }
         }
-        // swap
+        // Swap the found minimum element with the first unsorted element
         int temp = arr[i];
         arr[i] = arr[minIndex];
         arr[minIndex] = temp;
     }
 }
-
 🔹 3. Insertion Sort
 void insertionSort(int arr[], int n) {
     for (int i = 1; i < n; i++) {
@@ -75,7 +79,7 @@ int main() {
 }
 
 
-linear search
+linear search*********************
 #include<stdio.h>
 int main (){
    int a[50], n, i, key, flag = 0;

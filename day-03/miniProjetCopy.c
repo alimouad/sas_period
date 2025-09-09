@@ -60,30 +60,30 @@ int main(){
         switch (choice)
         {
         case 1:
-        
+            system("cls");
             addContact();
             break;
         case 2:
-        
+            system("cls");
             showAllContacts();
             break;
 
         case 3:
-        
+            system("cls");
             modifyContact();
             break;
 
         case 4:
-        
+            system("cls");
             deleteContact();
             break;
 
         case 5:
-       
+            system("cls");
             searchContact();
             break;
         case 6:
-       
+            system("cls");
             showDeletedContacts();
             break;
 
@@ -102,7 +102,7 @@ int main(){
 
 // menu Functions************
     void menu(){
-        printf("\n\tMENU\n");
+        printf("\n********MENU*****\n");
         printf("1.Add a Contact\n");
         printf("2.Show all Contacts\n");
         printf("3.Modify a Contact\n");
@@ -124,8 +124,6 @@ void addContact() {
         printf("\nEnter the contact name: ");
         scanf("%s", contact[i].contactName);
         
-        
-
         printf("Enter the contact number: ");
         scanf("%s", contact[i].number);
 
@@ -147,7 +145,6 @@ void showAllContacts() {
     }
 
     printf("you have %d contacts \n", contactSize);
-    
     for (int i = 0; i < contactSize; i++) {
             printf("\nContact %d\n", i + 1);
             printf("Name: %s\n", contact[i].contactName);
@@ -286,10 +283,10 @@ void showDeletedContacts() {
 
 void searchMenu(char *detail ){
     printf("\nSearch Contact to %s \n", detail);
-    printf("1.Search by Name\n");
-    printf("2.Search by Number\n");
-    printf("3.Search by Email Adress\n");
-    printf("4.Exit\n");
+    printf("\t1.Search by Name\n");
+    printf("\t2.Search by Number\n");
+    printf("\t3.Search by Email Adress\n");
+    printf("\t4.Exit\n");
 }
 
 
@@ -359,15 +356,30 @@ void deleteByDetail(char *detail) {
 
             printf("\nDeleting Contact: %s\n", contact[i].contactName);
 
-            deletedContact[deletedSize++] = contact[i];
+            char deleteChoice;
+            printf("Do you want to delete the contact? [Y or N]: ");
+            scanf(" %c", &deleteChoice);  // note the space before %c
+            if (deleteChoice == 'Y' || deleteChoice == 'y') {
+                // Save deleted contact if you want
+                deletedContact[deletedSize++] = contact[i];
 
-            contact[i] = contact[i + 1];
-            found = 1;
-            break;
-            printf("\n✅ Contact %s has been deleted.\n", contact[i].contactName);
+                // Shift remaining contacts left
+                for (int j = i; j < contactSize - 1; j++) {
+                    contact[j] = contact[j + 1];
+                }
+                contactSize--;
+
+                printf("\n✅ Contact %s has been deleted.\n", detail);
+                found = 1;
+                break;
+            } else {
+                printf("Deletion cancelled.\n");
+                return;  // Exit function if deletion declined
+            }
+   
         }
     }
-    contactSize--; 
+    
 
     if (!found) {
         printf("\n❌ Contact with detail '%s' not found.\n", detail);
