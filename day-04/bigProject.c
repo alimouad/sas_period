@@ -3,8 +3,7 @@
 #include <string.h>
 #include <time.h>   //time(),ctime()
 
-int choice, numberPlayerAdded = 0, numberPlayer, totalPlayers = 0, i;
-
+int choice,  numberPlayer, totalPlayers = 0, playerID = 1;
 struct players {
     int playerID;
     char playerName[100];
@@ -27,7 +26,8 @@ void modifyPlayer(void);
 void searchByPlayerDetail(char *detail);
 void deletePlayer(void);
 void statisticsPlayer(void);
-// void searchPlayer(void);
+void searchMain(void);
+void sortingMenu();
 
 
 int main(){
@@ -65,11 +65,11 @@ int main(){
             break;
 
         case 5:
-            system("cls");
-            // searchPlayer();
+            // system("cls");
+            searchMain();
             break;
         case 6:
-            system("cls");
+            // system("cls");
             statisticsPlayer();
             break;
 
@@ -102,6 +102,7 @@ int main(){
 
 // add player function ************
 void subMenu(void){
+    printf("--------------\n");
     printf("1.Add a Player\n");
     printf("2.Add multiple Player \n");
     printf("3.Exit\n");
@@ -129,65 +130,101 @@ void addPlayer(void){
     }
     
 }    
+void addSinglePlayer(void) {
+    int index = totalPlayers;  // Use current total as index
 
-void addSinglePlayer(void){
- 
-    int i = numberPlayerAdded; 
-    player[i].playerID = i + 1;
+    player[index].playerID = playerID;
+
     printf("Enter player Name:\n");
-    scanf("%s", player[i].playerName);
+    scanf("%s", player[index].playerName);
+
     printf("Enter player Last Name:\n");
-    scanf("%s", player[i].playerLastName);
+    scanf("%s", player[index].playerLastName);
+
     printf("Enter player Number:\n");
-    scanf("%d", &player[i].playerNumber);
-    printf("Enter player Position:\n");
-    scanf("%s", player[i].position);
+    scanf("%d", &player[index].playerNumber);
+
+    printf("Enter player position: Goalkeeper || Defence || Midfield || Attacker\n");
+
+    scanf("%s", player[index].position);
+
     printf("Enter player Age:\n");
-    scanf("%d", &player[i].age);
+    scanf("%d", &player[index].age);
+
     printf("Enter player Goals:\n");
-    scanf("%d", &player[i].goals);
+    scanf("%d", &player[index].goals);
 
     time_t now;
     time(&now);
+    player[index].dateInTeam = (int)now;
 
-    player[i].dateInTeam = (int)now;
-    numberPlayerAdded++;
+    playerID++;
     totalPlayers++;
-
 
     printf("Player added successfully!\n");
 }
 
-void multiPlayer(void){
+void multiPlayer(void) {
     time_t now;
     time(&now);
-    printf("How many players do you want to add?\n");
-    scanf("%d", &numberPlayer);
-    
 
-    for (int i = 0; i < numberPlayer; i++){
-        player[i].playerID = i + 1;
+    int numberToAdd;
+    printf("How many players do you want to add?\n");
+    scanf("%d", &numberToAdd);
+
+    for (int i = totalPlayers; i < totalPlayers + numberToAdd; i++) {
+        player[i].playerID = playerID;
+
         printf("Enter player Name:\n");
         scanf("%s", player[i].playerName);
+
         printf("Enter player Last Name:\n");
         scanf("%s", player[i].playerLastName);
+
         printf("Enter player Number:\n");
         scanf("%d", &player[i].playerNumber);
-        printf("Enter player Position:\n");
+
+        printf("Enter player position: Goalkeeper || Defence || Midfield || Attacker\n");
         scanf("%s", player[i].position);
+
         printf("Enter player Age:\n");
         scanf("%d", &player[i].age);
+
         printf("Enter player Goals:\n");
         scanf("%d", &player[i].goals);
+
         player[i].dateInTeam = (int)now;
-        totalPlayers++;
+
+        playerID++;
     }
+
+    totalPlayers += numberToAdd;
+
     printf("Players added successfully!\n");
 }
 
 
 
 // showAllPlayers function ************
+void sortingMenu(){
+    printf("\n++++++++++++++Sorting Menu++++++++++++++\n");
+    printf("1.Sort Players by Alphabet Order (Name) \n");
+    printf("1.Sort Players by ages \n");
+    printf("1.Sort Players by position \n");
+    printf("3.Exit\n");
+}
+void showPlayer(){
+    int i;
+    for (i = 0; i < totalPlayers; i++) {
+            printf("Player ID: %d\n", player[i].playerID);
+            printf("Name: %s %s\n", player[i].playerName, player[i].playerLastName);
+            printf("Age: %d\n", player[i].age);
+            printf("Position: %s\n", player[i].position);
+            printf("Number: %d\n", player[i].playerNumber);
+            printf("Goals: %d\n", player[i].goals);
+            printf("---------------------\n");
+        }
+}
 void showAllPlayers(){
     // n = numberPlayer + numberPlayerAdded;
     if (totalPlayers == 0) {
@@ -195,28 +232,62 @@ void showAllPlayers(){
         return;
     }
     
-    for (int i = 0; i < totalPlayers; i++){
-        printf("Player ID: %d\n", player[i].playerID );
-        printf("Player Name: %s\n", player[i].playerName);
-        printf("Player Last Name: %s\n", player[i].playerLastName);
-        printf("Player Number: %d\n", player[i].playerNumber);
-        printf("Player Position: %s\n", player[i].position);
-        printf("Player Age: %d\n", player[i].age);
-        printf("Player Goals: %d\n", player[i].goals);
-        // Convert timestamp to readable format
-        time_t t = (time_t)player[i].dateInTeam;
-        printf("Player Date In Team: %s", ctime(&t)); 
-        printf("\n");
+    printf("---------------------\n");
+    int running = 1;
+    while(running){
+        sortingMenu();
+        int choice;
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1: // Total players
+                printf("the available players: \n");
+                int i, j;
+                for (i = 0; i < totalPlayers - 1; i++) {
+                    for (j = 0; j < totalPlayers - 1 - i; j++) {
+                        if (strcmp(player[j].playerLastName, player[j + 1].playerLastName) > 0) {
+                            struct players temp = player[j];
+                            player[j] = player[j + 1];
+                            player[j + 1] = temp;
+                        }
+                    }
+                }
+
+            printf("the available players: \n");
+            // Print all players after sorting
+           showPlayer();
+           break;
+
+            case 2: {
+            int i, j;
+            for (i = 0; i < totalPlayers - 1; i++) {
+                for (j = 0; j < totalPlayers - 1 - i; j++) {
+                    if (player[j].age > player[j + 1].age) {
+                        // Swap entire player structs
+                        struct players temp = player[j];
+                        player[j] = player[j + 1];
+                        player[j + 1] = temp;
+                    }
+                }
+            }
+            printf("the available players: \n");
+            // Print all players after sorting
+            showPlayer(player);
+            break;
+            
+        }
+           
     }
+}
 }
 
 
 
 void searchMenu(char *detail ){
-    printf("\n++++++++++++++Search Player to %s ++++++++++++++n", detail);
-    printf("\t1.Search by Player ID\n");
-    printf("\t2.Search by Player Name\n");
-    printf("\t3.Exit\n");
+    printf("\n++++++++++++++Search Player to %s++++++++++++++\n", detail);
+    printf("1.Search by Player ID\n");
+    printf("2.Search by Player Name\n");
+    printf("3.Exit\n");
 
 }
 
@@ -293,6 +364,11 @@ void modifyPlayer(){
 
 
 void deletePlayer() {
+     if (totalPlayers == 0) {
+        printf("No players available.\n");
+        return;
+    }
+
     int found = 0;
     int playerIDFound;
     printf("Enter the player ID: ");
@@ -325,120 +401,195 @@ void deletePlayer() {
    
         }
     }
-    
 
     if (!found) {
         printf("\n the player with ID '%d' not found.\n", playerIDFound);
     }
 }
 
+
+void searchPlayer(char *detail){
+   
+    int found = 0;
+    int inputID = atoi(detail);  // convert string to int
+    for (int i = 0; i < totalPlayers; i++) {
+        // Compare with name, number, OR email
+        if (player[i].playerID == inputID||
+            strcmp(player[i].playerLastName, detail) == 0 ) {
+            printf("\n*******Player found*******\n");
+            printf("Player ID: %d\n", player[i].playerID);
+            printf("Player Name: %s\n", player[i].playerName);
+            printf("Player Last Name: %s\n", player[i].playerLastName);
+            printf("Player age: %d\n", player[i].age);
+            printf("Player Number: %d\n", player[i].playerNumber);
+            printf("Player position: %s\n", player[i].position);
+            printf("Player Goals: %d\n", player[i].goals);
+            
+            found = 1; 
+            break; 
+        }
+    }
+
+    if (!found) {
+        printf("\n Player with ID '%d' not found.\n", inputID);
+    }
+
+}
+void searchMain(){
+    int running = 1;
+    if (totalPlayers == 0) {
+        printf("No players available.\n");
+        return;
+    }
+
+    while(running){
+        char operaType[] = "search";
+        searchMenu(operaType);
+        int searchChoice;
+        char detail[100];
+
+        printf("\nEnter your choice: ");
+        scanf("%d", &searchChoice);
+        switch (searchChoice) {
+            case 1: // search by name
+                printf("Enter the player ID: ");
+                scanf("%s", detail);
+                searchPlayer(detail);
+                break;
+
+            case 2: // search by number
+                printf("Enter the player last Name : ");
+                scanf("%s", detail);
+                searchPlayer(detail);
+                break;
+            case 3: // exit
+                printf("Exiting search...\n");
+                running = 0;
+                break;
+
+            default:
+                printf("***** Invalid choice *****\n");
+        }
+        }
+    
+}
+
+
+// statistics*********
 void statisMenu(){
-    printf("\n++++++++++++++Player Statistics Menu ++++++++++++++n");
+    printf("\n++++++++++++++ Player Statistics Menu ++++++++++++++\n");
     printf("1. Show total number of players\n");
     printf("2. Show average age of players\n");
     printf("3. Show players with more than X goals\n");
     printf("4. Show top scorer (most goals)\n");
     printf("5. Show youngest and oldest player\n");
     printf("6. Exit\n");
+    printf("------------------------------------------------------\n");
 
 }
 
 void statisticsPlayer() {
+    int running = 1;
     if (totalPlayers == 0) {
         printf("No players available.\n");
         return;
     }
+    while(running){
+        statisMenu();
+        int choice;
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
 
-    statisMenu();
-    int choice;
-    printf("Enter your choice: ");
-    scanf("%d", &choice);
+        int i;
+        switch (choice) {
+            case 1: // Total players
+                printf("Total number of players: %d\n", totalPlayers);
+                break;
 
-    int i;
-    switch (choice) {
-        case 1: // Total players
-            printf("Total number of players: %d\n", totalPlayers);
-            break;
-
-        case 2: { // Average age
-            int totalAge = 0;
-            for (i = 0; i < totalPlayers; i++) {
-                totalAge += player[i].age;
-            }
-            float average = (float)totalAge / numberPlayerAdded;
-            printf("Average age: %.2f years\n", average);
-            break;
-        }
-
-        case 3: { // Players with more than X goals
-            int x;
-            printf("Enter the minimum number of goals: ");
-            scanf("%d", &x);
-
-            printf("Players with more than %d goals:\n", x);
-            int found = 0;
-            for (i = 0; i < totalPlayers; i++) {
-                if (player[i].goals > x) {
-                    printf("- %s %s (%d goals)\n", player[i].playerName, player[i].playerLastName, player[i].goals);
-                    found = 1;
+            case 2: { // Average age
+                int totalAge = 0;
+                for (i = 0; i < totalPlayers; i++) {
+                    totalAge += player[i].age;
                 }
+                int average = (int)totalAge / totalPlayers;
+                printf("Average age: %d years\n", average);
+                break;
             }
-            if (!found) {
-                printf("No player found with more than %d goals.\n", x);
-            }
-            break;
-        }
 
-        case 4: { 
-            int maxGoals = player[0].goals;
-            int topIndex = 0;
+            case 3: { // Players with more than X goals
+                int x;
+                printf("Enter the minimum number of goals: ");
+                scanf("%d", &x);
 
-            for (i = 1; i < numberPlayerAdded; i++) {
-                if (player[i].goals > maxGoals) {
-                    maxGoals = player[i].goals;
-                    topIndex = i;
+                printf("Players with more than %d goals:\n", x);
+                int found = 0;
+                for (i = 0; i < totalPlayers; i++) {
+                    if (player[i].goals > x) {
+                        printf("- %s %s (%d goals)\n", player[i].playerName, player[i].playerLastName, player[i].goals);
+                        found = 1;
+                    }
                 }
+                if (!found) {
+                    printf("No player found with more than %d goals.\n", x);
+                }
+                break;
             }
 
-            printf("Top Scorer: %s %s (%d goals)\n",
-                   player[topIndex].playerName,
-                   player[topIndex].playerLastName,
-                   player[topIndex].goals);
-            break;
-        }
+            case 4: { 
+                int maxGoals = player[0].goals;
+                int topIndex = 0;
 
-        case 5: { // Youngest and oldest player
-            int minAge = player[0].age, maxAge = player[0].age;
-            int youngest = 0, oldest = 0;
+                for (i = 1; i <= totalPlayers; i++) {
+                    if (player[i].goals > maxGoals) {
+                        maxGoals = player[i].goals;
+                        topIndex = i;
+                    }
+                }
 
-            for (i = 1; i < numberPlayerAdded; i++) {
-                if (player[i].age < minAge) {
-                    minAge = player[i].age;
-                    youngest = i;
-                }
-                if (player[i].age > maxAge) {
-                    maxAge = player[i].age;
-                    oldest = i;
-                }
+                printf("Top Scorer: %s %s (%d goals)\n",
+                    player[topIndex].playerName,
+                    player[topIndex].playerLastName,
+                    player[topIndex].goals);
+                break;
             }
 
-            printf("Youngest Player: %s %s (%d years)\n",
-                   player[youngest].playerName,
-                   player[youngest].playerLastName,
-                   player[youngest].age);
+            case 5: { // Youngest and oldest player
+                int minAge = player[0].age, maxAge = player[0].age;
+                int youngest = 0, oldest = 0;
 
-            printf("Oldest Player: %s %s (%d years)\n",
-                   player[oldest].playerName,
-                   player[oldest].playerLastName,
-                   player[oldest].age);
-            break;
+                for (i = 1; i < totalPlayers; i++) {
+                    if (player[i].age < minAge) {
+                        minAge = player[i].age;
+                        youngest = i;
+                    }
+                    if (player[i].age > maxAge) {
+                        maxAge = player[i].age;
+                        oldest = i;
+                    }
+                }
+
+                printf("Youngest Player: %s %s (%d years)\n",
+                    player[youngest].playerName,
+                    player[youngest].playerLastName,
+                    player[youngest].age);
+
+                printf("Oldest Player: %s %s (%d years)\n",
+                    player[oldest].playerName,
+                    player[oldest].playerLastName,
+                    player[oldest].age);
+                break;
+            }
+
+            case 6:
+                printf("Exiting statistics menu...\n");
+                
+                running = 0;  
+                break;
+
+            default:
+                printf("Invalid choice.\n");
         }
-
-        case 6:
-            printf("Exiting statistics menu...\n");
-            break;
-
-        default:
-            printf("Invalid choice.\n");
     }
-}
+    }
+    
+

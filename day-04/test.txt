@@ -22,3 +22,18 @@
 
 //     divider();
 // }
+
+
+   // for (int i = 0; i < totalPlayers; i++){
+    //     printf("Player ID: %d\n", player[i].playerID );
+    //     printf("Player Name: %s\n", player[i].playerName);
+    //     printf("Player Last Name: %s\n", player[i].playerLastName);
+    //     printf("Player Number: %d\n", player[i].playerNumber);
+    //     printf("Player Position: %s\n", player[i].position);
+    //     printf("Player Age: %d\n", player[i].age);
+    //     printf("Player Goals: %d\n", player[i].goals);
+    //     // Convert timestamp to readable format
+    //     time_t t = (time_t)player[i].dateInTeam;
+    //     printf("Player Date In Team: %s", ctime(&t)); 
+    //     printf("-----------------------------\n"); 
+    // }
