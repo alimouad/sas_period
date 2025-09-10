@@ -209,10 +209,31 @@ void multiPlayer(void) {
 void sortingMenu(){
     printf("\n++++++++++++++Sorting Menu++++++++++++++\n");
     printf("1.Sort Players by Alphabet Order (Name) \n");
-    printf("1.Sort Players by ages \n");
-    printf("1.Sort Players by position \n");
-    printf("3.Exit\n");
+    printf("2.Sort Players by ages \n");
+    printf("3.Sort Players by position \n");
+    printf("4.Exit\n");
 }
+void showPlayersByPosition(const char *pos) {
+    int found = 0;
+
+    for (int i = 0; i < totalPlayers; i++) {
+        if (strcmp(player[i].position, pos) == 0) {
+            printf("Player ID: %d\n", player[i].playerID);
+            printf("Name: %s %s\n", player[i].playerName, player[i].playerLastName);
+            printf("Number: %d\n", player[i].playerNumber);
+            printf("Position: %s\n", player[i].position);
+            printf("Age: %d\n", player[i].age);
+            printf("Goals: %d\n", player[i].goals);
+            printf("---------------------------\n");
+            found = 1;
+        }
+    }
+
+    if (!found) {
+        printf("No players found for position: %s\n", pos);
+    }
+}
+
 void showPlayer(){
     int i;
     for (i = 0; i < totalPlayers; i++) {
@@ -225,24 +246,25 @@ void showPlayer(){
             printf("---------------------\n");
         }
 }
-void showAllPlayers(){
-    // n = numberPlayer + numberPlayerAdded;
+void showAllPlayers() {
     if (totalPlayers == 0) {
         printf("No players available.\n");
         return;
     }
-    
-    printf("---------------------\n");
+
+    char position[20];
     int running = 1;
-    while(running){
+
+    while (running) {
         sortingMenu();
         int choice;
         printf("Enter your choice: ");
         scanf("%d", &choice);
+
+        int i, j;
+
         switch (choice) {
-            case 1: // Total players
-                printf("the available players: \n");
-                int i, j;
+            case 1: // Sort by last name
                 for (i = 0; i < totalPlayers - 1; i++) {
                     for (j = 0; j < totalPlayers - 1 - i; j++) {
                         if (strcmp(player[j].playerLastName, player[j + 1].playerLastName) > 0) {
@@ -252,35 +274,40 @@ void showAllPlayers(){
                         }
                     }
                 }
+                printf("Players sorted by last name:\n");
+                showPlayer();  // Assuming no params, prints all players
+                break;
 
-            printf("the available players: \n");
-            // Print all players after sorting
-           showPlayer();
-           break;
-
-            case 2: {
-            int i, j;
-            for (i = 0; i < totalPlayers - 1; i++) {
-                for (j = 0; j < totalPlayers - 1 - i; j++) {
-                    if (player[j].age > player[j + 1].age) {
-                        // Swap entire player structs
-                        struct players temp = player[j];
-                        player[j] = player[j + 1];
-                        player[j + 1] = temp;
+            case 2: // Sort by age
+                for (i = 0; i < totalPlayers - 1; i++) {
+                    for (j = 0; j < totalPlayers - 1 - i; j++) {
+                        if (player[j].age > player[j + 1].age) {
+                            struct players temp = player[j];
+                            player[j] = player[j + 1];
+                            player[j + 1] = temp;
+                        }
                     }
                 }
-            }
-            printf("the available players: \n");
-            // Print all players after sorting
-            showPlayer(player);
-            break;
-            
+                printf("Players sorted by age:\n");
+                showPlayer();
+                break;
+
+            case 3: // Show players by position
+                printf("Enter position (Goalkeeper, Defence, Midfield, Attacker): ");
+                scanf("%s", position);
+                showPlayersByPosition(position);
+                break;
+
+            case 4: // Exit
+                printf("Exiting...\n");
+                running = 0;
+                break;
+
+            default:
+                printf("Invalid choice, try again.\n");
         }
-           
     }
 }
-}
-
 
 
 void searchMenu(char *detail ){
