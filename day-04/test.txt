@@ -1,0 +1,24 @@
+// void searchPlayerName(){
+//     char searchName[100];
+//     printf("Enter the player name you wanna search: ");
+//     scanf("%s", searchName);
+
+//     int found = 0; 
+
+//     for (i = 0; i < n; i++) {
+//         if (strcmp(player[i].playerName, searchName) == 0) {
+//             printf("\nContact found:\n");
+//             printf("Name: %s\n", player[i].);
+//             printf("Number: %s\n", player[i].number);
+//             printf("Email Adress: %s\n", player[i].);
+//             found = 1; 
+//             break; 
+//         }
+//     }
+
+//     if (!found) {
+//         printf("\n Player with name '%s' not found.\n", searchName);
+//     }
+
+//     divider();
+// }
