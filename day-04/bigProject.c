@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>   //time(),ctime()
+#include <time.h>   
 
-int choice,  numberPlayer, totalPlayers = 0, playerID = 1;
+// golbal variable************
+int choice,  numberPlayer, totalPlayers = 10, playerID = 11;
 int deletedSize = 0;
 struct players {
     int playerID;
@@ -17,8 +18,10 @@ struct players {
 };
 
 struct players player[100];
+
 // struct deletedPlayers deletedplayer[100];
 
+// declaring functions*******
 void menu(void);
 void addPlayer(void);
 void addSubMenu(void);
@@ -31,13 +34,16 @@ void deletePlayer(void);
 void statisticsPlayer(void);
 void searchPlayer(void);
 void sortingMenu();
+void fillPlayers();
 
 
+// main fucntion*******
 int main(){
+    fillPlayers();
     while (1){
         // show menu function***
         menu();
-
+        
         printf("\nEnter your choice :\n");
         scanf("%d", &choice);
 
@@ -88,6 +94,26 @@ int main(){
 }
 
 
+// data base of players**********************
+void fillPlayers() {
+    time_t now = time(NULL);
+    struct players temp[] = {
+        {1, "Lionel", "Messi", 10, "Forward", 38, 15, (int)now},
+        {2, "Cristiano", "Ronaldo", 7, "Forward", 40, 18, (int)(now - 86400 * 365)},
+        {3, "Kylian", "Mbappe", 7, "Forward", 27, 22, (int)(now - 86400 * 200)},
+        {4, "Kevin", "De Bruyne", 17, "Midfielder", 34, 9, (int)(now - 86400 * 600)},
+        {5, "Virgil", "van Dijk", 4, "Defender", 33, 4, (int)(now - 86400 * 400)},
+        {6, "Erling", "Haaland", 9, "Forward", 25, 25, (int)(now - 86400 * 100)},
+        {7, "Luka", "Modric", 10, "Midfielder", 40, 7, (int)(now - 86400 * 800)},
+        {8, "Neymar", "Jr", 10, "Forward", 34, 12, (int)(now - 86400 * 300)},
+        {9, "Sergio", "Ramos", 4, "Defender", 39, 5, (int)(now - 86400 * 900)},
+        {10, "Mohamed", "Salah", 11, "Forward", 33, 20, (int)(now - 86400 * 250)}
+    };
+
+    // Copy to global player[] array
+    memcpy(player, temp, sizeof(temp));
+}
+
 
 // menu Functions************
 void menu(){
@@ -105,10 +131,10 @@ void menu(){
 
 // add player function ************
 void addSubMenu(void){
-    printf("+++++++++Adding Player++++++++++++++");
-    printf("---------------------------------\n");
+    printf("-------------Adding Players-------------\n");
+    printf("----------------------------------------\n");
     printf("1.Add a Player\n");
-    printf("2.Add multiple Player \n");
+    printf("2.Add multiple Players \n");
     printf("3.Exit\n");
     
 }
@@ -217,11 +243,13 @@ void multiPlayer(void) {
 
 // showAllPlayers function ************
 void sortingMenu() {
-    printf("++++++++++++++ Sorting Menu ++++++++++++++\n");
-    printf("1. Sort players by alphabetical order (name)\n");
-    printf("2. Sort players by age\n");
-    printf("3. Sort players by position\n");
-    printf("4. Exit\n");
+    printf("\n1. displaying all players \n");
+    printf("------------------------------------\n");
+    printf("----------- Sorting Menu -----------\n");
+    printf("2. Sort players by alphabetical order (name)\n");
+    printf("3. Sort players by age\n");
+    printf("4. Sort players by position\n");
+    printf("5. Exit\n");
 }
 
 // void displayPlayersByPosition(char *pos) {
@@ -247,20 +275,20 @@ void sortingMenu() {
 void displayPlayer(){
     int i;
     for (i = 0; i < totalPlayers; i++) {
+            printf("| Player ID: %d\n", player[i].playerID);
             if (player[i].goals > 10){
-                printf("Name: %s %s (Super Star)\n", player[i].playerName, player[i].playerLastName);
+                printf("| Name: %s %s (Super Star)\n", player[i].playerName, player[i].playerLastName);
             }
             else {
-                printf("Name: %s %s\n", player[i].playerName, player[i].playerLastName);
+                printf("| Name: %s %s\n", player[i].playerName, player[i].playerLastName);
             }
-            
-            printf("Player ID: %d\n", player[i].playerID);
-            printf("Age: %d\n", player[i].age);
-            printf("Position: %s\n", player[i].position);
-            printf("Number: %d\n", player[i].playerNumber);
-            printf("Goals: %d\n", player[i].goals);
-          
-            
+            printf("| Age: %d\n", player[i].age);
+            printf("| Position: %s\n", player[i].position);
+            printf("| Number: %d\n", player[i].playerNumber);
+            printf("| Goals: %d\n", player[i].goals);
+              // Convert timestamp to readable format
+            time_t t = (time_t)player[i].dateInTeam;
+            printf("| Player Date In Team: %s", ctime(&t)); 
             printf("---------------------\n");
         }
 }
@@ -284,16 +312,18 @@ void displayAllPlayers() {
         int i, j;
 
         switch (choice) {
-            case 1: //sort by name
+            case 1:
+            displayPlayer();
+            break;
+            case 2: //sort by name
                 for (i = 0; i < totalPlayers; i++) {
-                    for (j = 0; j < totalPlayers - 1 ; j++) {
-                        // if B > A then swap B with A
-                        if (strcmp(player[j].playerLastName, player[j + 1].playerLastName) > 0) {
-                            struct players temp = player[j];
-                            player[j] = player[j + 1];
-                            player[j + 1] = temp;
-                        }
+                for (j = 0; j < totalPlayers - 1; j++) {
+                    if (strcasecmp(player[j].playerLastName, player[j + 1].playerLastName) > 0) {
+                        struct players temp = player[j];
+                        player[j] = player[j + 1];
+                        player[j + 1] = temp;
                     }
+                }   
                 }
                 printf("Players sorted by last name:\n");
                 printf("---------------------------\n");
@@ -301,7 +331,7 @@ void displayAllPlayers() {
                 printf("---------------------------\n");
                 break;
 
-            case 2: //sort by age 
+            case 3: //sort by age 
                 for (i = 0; i < totalPlayers; i++) {
                     for (j = 0; j < totalPlayers - 1; j++) {
                         if (player[j].age > player[j + 1].age) {
@@ -317,7 +347,7 @@ void displayAllPlayers() {
                 printf("---------------------------\n");
                 break;
 
-            case 3: // Show players by position
+            case 4: // Show players by position
                 for (i = 0; i < totalPlayers; i++) {
                     for (j = 0; j < totalPlayers - 1 ; j++) {
                         // if B > A then swap B with A
@@ -334,7 +364,7 @@ void displayAllPlayers() {
                 printf("---------------------------\n");
                 break;
 
-            case 4: // Exit
+            case 5: // Exit
                 printf("Exiting.......\n");
                 running = 0;
                 break;
@@ -349,13 +379,15 @@ void displayAllPlayers() {
 
 
 
+
+
 // searching function**********
 void searchMenu(char *detail ){
-    printf("\n++++++++++++++Search Player to %s++++++++++++++\n", detail);
+    printf("\n-------------Search Player to %s-------------\n", detail);
     printf("1.Search by Player ID\n");
     printf("2.Search by Player LastName\n");
     printf("3.Exit\n");
-    printf("---------------------------------------------------\n");
+    printf("------------------------------------------------\n");
 
 }
 void searchByPlayerDetail(char *detail) {
@@ -398,7 +430,7 @@ void modifyPlayer(){
     }
     while (running)
     {    
-    printf("\n++++++++++++++Modify Player++++++++++++++\n");
+    printf("\n-------------Modify Player-------------\n");
     printf("-------------------------------------------\n");
     char operaType[] = "modify";
     searchMenu(operaType);
@@ -430,7 +462,6 @@ void modifyPlayer(){
             printf("***** Invalid choice *****\n");
     }
      }
-
 }
 
 
@@ -446,8 +477,8 @@ void deletePlayer() {
 
     int found = 0;
     int playerIDFound;
-    printf("\n++++++++++++++Delete Player++++++++++++++\n");
-    printf("------------------------------------------\n");
+    printf("\n-------------Delete Player-------------\n");
+    printf("-----------------------------------------\n");
     
     printf("Enter the player ID: ");
     scanf("%d", &playerIDFound);
@@ -498,16 +529,16 @@ void searchMain(char *detail){
         if (player[i].playerID == inputID||
             strcmp(player[i].playerLastName, detail) == 0 ) {
             printf("\n*******Player found*******\n");
-            printf("Player ID: %d\n", player[i].playerID);
-            printf("Player Name: %s\n", player[i].playerName);
-            printf("Player Last Name: %s\n", player[i].playerLastName);
-            printf("Player age: %d\n", player[i].age);
-            printf("Player Number: %d\n", player[i].playerNumber);
-            printf("Player position: %s\n", player[i].position);
-            printf("Player Goals: %d\n", player[i].goals);
+            printf("| Player ID: %d\n", player[i].playerID);
+            printf("| Player Name: %s\n", player[i].playerName);
+            printf("| Player Last Name: %s\n", player[i].playerLastName);
+            printf("| Player age: %d\n", player[i].age);
+            printf("| Player Number: %d\n", player[i].playerNumber);
+            printf("| Player position: %s\n", player[i].position);
+            printf("| Player Goals: %d\n", player[i].goals);
            // Convert timestamp to readable format
             time_t t = (time_t)player[i].dateInTeam;
-            printf("Player Date In Team: %s", ctime(&t)); 
+            printf("| Player Date In Team: %s", ctime(&t)); 
             printf("-----------------------------\n"); 
             found = 1; 
             break; 
@@ -562,7 +593,7 @@ void searchPlayer(){
 
 // statistics************
 void statisMenu(){
-    printf("\n++++++++++++++ Player Statistics Menu ++++++++++++++\n");
+    printf("\n------------- Player Statistics Menu -------------\n");
     printf("1. Show total number of players\n");
     printf("2. Show average age of players\n");
     printf("3. Show players with more than X goals\n");
