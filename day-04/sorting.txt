@@ -1,0 +1,162 @@
+Sorting Methods *******************
+1. Bubble Sort
+#include <stdio.h>
+
+void bubbleSort(int arr[], int n){
+    int i , j;
+    for(i = 0 ; i < n; i++){
+        for (j = 0; j < n - 1; j++){
+           if (arr[j] > arr[j + 1]) {         // 
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+int main() {
+    int i;
+    int arra[] = {12,323,223,1,13};
+    int length = sizeof(arra) / sizeof(arra[0]);
+     for (i = 0; i < length; i++){
+        printf("%d\n",arra[i]);
+    }
+    printf("done");
+    // must be an array, not string literal
+    bubbleSort(arra, length);
+    for (i = 0; i < length; i++){
+        printf("%d\n",arra[i]);
+    }
+    printf("done");
+    return 0;
+}
+
+
+🔹 2. Selection Sort
+void selectionSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        int minIndex = i;                  // Assume the minimum is the first unsorted element
+        for (int j = i + 1; j < n; j++) { // Look through the rest of the unsorted elements
+            if (arr[j] < arr[minIndex]) { // If a smaller element is found
+                minIndex = j;             // Update minIndex to this new minimum element
+            }
+        }
+        // Swap the found minimum element with the first unsorted element
+        int temp = arr[i];
+        arr[i] = arr[minIndex];
+        arr[minIndex] = temp;
+    }
+}
+🔹 3. Insertion Sort
+void insertionSort(int arr[], int n) {
+    for (int i = 1; i < n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+        // shift bigger elements to the right
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+}
+
+🔹 Example Usage
+int main() {
+    int arr[] = {5, 2, 9, 1, 6};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    // Try one of the sorting algorithms
+    bubbleSort(arr, n);
+    // selectionSort(arr, n);
+    // insertionSort(arr, n);
+
+    printf("Sorted array: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    return 0;
+}
+
+
+linear search*********************
+#include<stdio.h>
+int main (){
+   int a[50], n, i, key, flag = 0;
+   printf("enter the no: of elements");
+   scanf ("%d",&n);
+   printf("enter the elements:
+");
+   for (i=0; i<n; i++)
+      scanf( "%d", &a[i]);
+   printf("enter a key element:
+");
+   scanf ("%d", &key);
+   for (i=0; i<n; i++){
+      if (a[i] == key){
+         flag = 1;
+         break;
+      }
+   }
+   if (flag == 1)
+      printf("search is successful:");
+   else
+      printf("search is unsuccessfull:");
+   return 0;
+}
+
+
+
+// Binary Search method***************
+Define a binSearch() function that accepts the array, the size of the array, and the target that you want to search.
+Then calculate the middle index of the array.
+Compare the target with the middle element using an if-else statement. Return the middle element if the target is found at the middle index.
+If the target is not available at the middle index, then check if it is greater or less than the middle element.
+If the target is greater than the middle element, then set the left index to mid + 1 and search in the right half of the array.
+If the target is less than the middle element, then set the right index to mid - 1 and search in the left half of the array.
+Repeat the above four steps until the left index becomes greater than the right index. If the element is found, return the index; otherwise, return element not found.
+#include <stdio.h>
+
+int binarySearch(int arr[], int size, int target) {
+    int left = 0, right = size - 1;
+    int foundIndex = -1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+
+        if (arr[mid] == target) {
+            foundIndex = mid;
+            break;
+        } else if (arr[mid] < target) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return foundIndex;
+}
+
+int main() {
+    int arr[] = {2, 4, 6, 8, 10, 12, 14};
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    int target;
+    printf("Enter the number to search: ");
+    scanf("%d", &target);
+
+    int result = binarySearch(arr, size, target);
+
+    if (result != -1) {
+        printf("✅ Element found at index: %d\n", result);
+    } else {
+        printf("❌ Element not found in the array.\n");
+    }
+
+    return 0;
+}
+
+In simple terms:
+
+If you have a sorted array, binary search is way faster than linear search.
+
+For small or unsorted arrays, linear search is simpler and sometimes preferable.
